@@ -17,6 +17,7 @@ export default function Cadastro(){
     const [loader,setLoader] = useState("apagar")
     const [ativado,setAtivado] = useState(true);
     const [cor,setCor] = useState(1);
+    const [espera,setEspera] = useState(true);
 
     return(
         <Container>
@@ -68,9 +69,19 @@ export default function Cadastro(){
                 }
                     console.log(dados)
 
-                // const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', dados);
-                // promise.then(()=> (console.log(promise)))
-                // promise.catch(()=> (console.log('nao foi')))
+                 const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', dados);
+                 promise.then(()=> (console.log(promise)))
+                 promise.catch(()=> (setEspera(!true)))
+
+                 if(espera === true){
+                    setTimeout(()=>(
+                        setAtivado(true),
+                        setBotao(""),
+                        setLoader("apagar"),
+                        setCor(1),
+                        setEspera(true)
+                    ), 1000)
+                 }
             } else alert("Preench todos os campos");
         } else console.log('desativado')
     }
