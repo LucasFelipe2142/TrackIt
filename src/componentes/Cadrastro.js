@@ -70,8 +70,8 @@ export default function Cadastro(){
                     console.log(dados)
 
                  const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', dados);
-                 promise.then(()=> (console.log(promise)))
-                 promise.catch(()=> (setEspera(!true)))
+                 promise.then(()=> (navigate('/')))
+                 promise.catch(()=> (setEspera(!true),alert("Algo de errado não está certo")))
 
                  if(espera === true){
                     setTimeout(()=>(

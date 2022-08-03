@@ -2,8 +2,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Logo from './Logo_nome'
 import { useNavigate } from 'react-router';
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import { ThreeDots } from  'react-loader-spinner'
+import Contextos from '../contextos/Context';
 
 export default function Login(){
     const navigate = useNavigate();
@@ -13,6 +14,11 @@ export default function Login(){
     const [icon,setIcon] = useState("eye-outline")
     const [botao,setBotao] = useState("")
     const [loader,setLoader] = useState("apagar")
+    const [ativado,setAtivado] = useState(true);
+    const [cor,setCor] = useState(1);
+    const [espera,setEspera] = useState(true);
+
+    const {setFoto,setToken} = useContext(Contextos);
 
     return(
         <Container>
@@ -23,7 +29,7 @@ export default function Login(){
                 Mostrar senha
                 <Mostrar onClick={() => toggle()}> <ion-icon name={icon}></ion-icon></Mostrar>
             </div>
-            <Button onClick={() => Enviar()}>
+            <Button cor={cor} onClick={() => Enviar()}>
                 <div className={botao}>Entrar</div>
                 <div className = {loader} ><ThreeDots color="#FFFFFF" height={60} width={60} /></div>   
             </Button>
@@ -45,19 +51,42 @@ export default function Login(){
         }
     }
 
-    function Enviar(){
+    function Enviar(){ 
+
+       if(ativado){
+        console.log('ativado')
         if(login !== '' && senha !== ''){
+            setAtivado(!true)
+            setBotao("apagar")
+            setLoader("")
+            setCor(0.7)
             let dados = {
                 email: login,
                 password: senha
             }
+                
 
-            // const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', dados);
-            // promise.then(()=> (console.log(promise)))
-            // promise.catch(()=> (console.log('nao foi')))
+             const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', dados);
+             promise.then(logar)
+             promise.catch(()=> (setEspera(!true),alert("Algo de errado não está certo")))
 
+             if(espera === true){
+                setTimeout(()=>(
+                    setAtivado(true),
+                    setBotao(""),
+                    setLoader("apagar"),
+                    setCor(1),
+                    setEspera(true)
+                ), 1000)
+             }
+        } else alert("Preench todos os campos");
+    } else console.log('desativado')
+    }
 
-       } 
+    function logar(promise){
+        setFoto(promise.data.image)
+        setToken(promise.data.token)
+        navigate('/hoje')
     }
 }
 
@@ -116,6 +145,7 @@ const Button = styled.div`
 
     background: #52B6FF;
     border-radius: 4.63636px;
+    opacity: ${props => props.cor};
 
     display: flex;
     justify-content: center;
