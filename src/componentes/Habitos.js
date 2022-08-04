@@ -8,6 +8,7 @@ import Footer from './Footer'
 import Contextos from '../contextos/Context'
 
 export default function Hoje(){
+    const [novohab,setNovohab] = useState('apagar')
     const {foto,token} = useContext(Contextos);
     console.log(foto,token)
     return(
@@ -15,10 +16,10 @@ export default function Hoje(){
             <Topo />
             <div className='inserir_habito'>
             Meus hábitos
-            <div className='button'>+</div>
+            <div onClick={() => ativar()} className='button'>+</div>
             </div>
 
-            <Novo_habito></Novo_habito>
+            <Novo_habito className={novohab}></Novo_habito>
 
             <div className='instruction'>
             Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
@@ -26,6 +27,10 @@ export default function Hoje(){
             <Footer />
         </Container>
     )
+    function ativar(){
+        if(novohab === 'apagar')setNovohab("");
+        else setNovohab('apagar')
+    }
 }
 
 const Container = styled.div`
@@ -83,6 +88,10 @@ align-items: center;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .apagar{
+        display: none;
     }
 `
 
