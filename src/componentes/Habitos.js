@@ -1,16 +1,24 @@
-import axios from 'axios';
+
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
-import { useState, useEffect, useContext } from "react";
-import { ThreeDots } from  'react-loader-spinner'
+import { useContext,useState } from "react";
 import Topo from './Top'
 import Footer from './Footer'
 import Contextos from '../contextos/Context'
+import Novo_habito from './Novo_habito'
+import Meus_habitos from './Meus_habitos'
+
+
 
 export default function Hoje(){
-    const [novohab,setNovohab] = useState('apagar')
-    const {foto,token} = useContext(Contextos);
-    console.log(foto,token)
+    const {novohab,setNovohab,habitos} = useContext(Contextos)
+    let temhabito;
+
+    if(habitos.length === 0){
+        temhabito = 'instruction'
+    }else temhabito = 'instruction apagar'
+
+
     return(
         <Container><div style={{height: 91,}}></div>
             <Topo />
@@ -18,10 +26,9 @@ export default function Hoje(){
             Meus hábitos
             <div onClick={() => ativar()} className='button'>+</div>
             </div>
-
-            <Novo_habito className={novohab}></Novo_habito>
-
-            <div className='instruction'>
+            <Novo_habito />
+            <Meus_habitos />
+            <div className={temhabito}>
             Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
             </div>
             <Footer />
@@ -31,6 +38,7 @@ export default function Hoje(){
         if(novohab === 'apagar')setNovohab("");
         else setNovohab('apagar')
     }
+
 }
 
 const Container = styled.div`
@@ -66,6 +74,7 @@ align-items: center;
         font-weight: 400;
         font-size: 22.976px;
         line-height: 29px;
+        margin-bottom: 20px;
         /* identical to box height */
 
 
@@ -76,7 +85,6 @@ align-items: center;
     .instruction{
         width: 100%;
         height: 74px;
-        margin-top: 30px;
         padding: 0 18px 0 18px;
 
         font-style: normal;
@@ -93,13 +101,6 @@ align-items: center;
     .apagar{
         display: none;
     }
-`
 
-const Novo_habito = styled.div`
-    width: 340px;
-    height: 180px;
-    margin-top: 20px;
 
-    background: #FFFFFF;
-    border-radius: 5px;
 `

@@ -4,7 +4,6 @@ import { useContext } from 'react';
 
 export default function Topo() {
     const {foto,token} = useContext(Contextos);
-    console.log(JSON.parse(localStorage.getItem("perfil")))
     return (
         <>
             <Top>

@@ -17,14 +17,15 @@ export default function Login(){
     const [ativado,setAtivado] = useState(true);
     const [cor,setCor] = useState(1);
     const [espera,setEspera] = useState(true);
+    const [desabilitarinput,setDesabilitarinput] = useState(false)
 
     const {setFoto,setToken} = useContext(Contextos);
 
     return(
         <Container>
             <Logo></Logo>
-            <input type="text" name="input" placeholder="email" value={login} onChange={e => setLogin(e.target.value)} />
-            <input type={mostrar} name="input" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} />
+            <input disabled={desabilitarinput} type="text" name="input" placeholder="email" value={login} onChange={e => setLogin(e.target.value)} />
+            <input disabled={desabilitarinput} type={mostrar} name="input" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} />
             <div className='mostrar_senha'>
                 Mostrar senha
                 <Mostrar onClick={() => toggle()}> <ion-icon name={icon}></ion-icon></Mostrar>
@@ -56,6 +57,7 @@ export default function Login(){
        if(ativado){
         console.log('ativado')
         if(login !== '' && senha !== ''){
+            setDesabilitarinput(true)
             setAtivado(!true)
             setBotao("apagar")
             setLoader("")
@@ -70,8 +72,9 @@ export default function Login(){
              promise.then(logar)
              promise.catch(()=> (setEspera(!true),alert("Algo de errado não está certo")))
 
-             if(espera === true){
+             if(espera !== true){
                 setTimeout(()=>(
+                    setDesabilitarinput(false),
                     setAtivado(true),
                     setBotao(""),
                     setLoader("apagar"),

@@ -18,14 +18,15 @@ export default function Cadastro(){
     const [ativado,setAtivado] = useState(true);
     const [cor,setCor] = useState(1);
     const [espera,setEspera] = useState(true);
+    const [desabilitarinput,setDesabilitarinput] = useState(false)
 
     return(
         <Container>
             <Logo></Logo>
-            <input type="text" name="input" placeholder="email" value={login} onChange={e => setLogin(e.target.value)} />
-            <input type={mostrar} name="input" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} />
-            <input type="text" name="input" placeholder="nome" value={nome} onChange={e => setNome(e.target.value)} />
-            <input type="text" name="input" placeholder="foto" value={foto} onChange={e => setFoto(e.target.value)} />  
+            <input disabled={desabilitarinput} type="text" name="input" placeholder="email" value={login} onChange={e => setLogin(e.target.value)} />
+            <input disabled={desabilitarinput} type={mostrar} name="input" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} />
+            <input disabled={desabilitarinput} type="text" name="input" placeholder="nome" value={nome} onChange={e => setNome(e.target.value)} />
+            <input disabled={desabilitarinput} type="text" name="input" placeholder="foto" value={foto} onChange={e => setFoto(e.target.value)} />  
             <div className='mostrar_senha'>
                 Mostrar senha
                 <Mostrar onClick={() => toggle()}> <ion-icon name={icon}></ion-icon></Mostrar>
@@ -57,6 +58,7 @@ export default function Cadastro(){
         if(ativado){
             console.log('ativado')
             if(login !== '' && senha !== '' && foto !== '' && nome !== '' ){
+                setDesabilitarinput(true)
                 setAtivado(!true)
                 setBotao("apagar")
                 setLoader("")
@@ -75,6 +77,7 @@ export default function Cadastro(){
 
                  if(espera === true){
                     setTimeout(()=>(
+                        setDesabilitarinput(false),
                         setAtivado(true),
                         setBotao(""),
                         setLoader("apagar"),
