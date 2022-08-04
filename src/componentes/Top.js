@@ -4,11 +4,12 @@ import { useContext } from 'react';
 
 export default function Topo() {
     const {foto,token} = useContext(Contextos);
+    console.log(JSON.parse(localStorage.getItem("perfil")))
     return (
         <>
             <Top>
                 TrackIt
-                <img src={foto} />
+                <img src={JSON.parse(localStorage.getItem("perfil"))} />
             </Top>
 
             <Compensando></Compensando>

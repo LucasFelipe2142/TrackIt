@@ -13,6 +13,7 @@ export default function Hoje(){
     return(
         <Container>
             <Topo />
+            
             <Footer />
         </Container>
     )

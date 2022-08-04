@@ -84,14 +84,15 @@ export default function Login(){
     }
 
     function logar(promise){
-        setFoto(promise.data.image)
-        setToken(promise.data.token)
+        localStorage.setItem("token", JSON.stringify(promise.data.token));
+        localStorage.setItem("perfil", JSON.stringify(promise.data.image));
         navigate('/hoje')
     }
 }
 
 const Container = styled.div`
     height: 100vh;
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: center;

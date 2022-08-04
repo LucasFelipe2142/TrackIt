@@ -1,9 +1,5 @@
-import axios from 'axios';
 import styled from 'styled-components';
-import Logo from './Logo_nome'
 import { useNavigate } from 'react-router';
-import { useState, useEffect } from "react";
-import { ThreeDots } from 'react-loader-spinner'
 
 import {
     CircularProgressbar,
@@ -16,28 +12,27 @@ import "react-circular-progressbar/dist/styles.css";
 
 
 export default function Topo() {
+    const navigate = useNavigate();
     return (
         <>
             <Footer>
-                
-
+                <div onClick={() => navigate('/habitos')} >Hábitos</div>
+                <div onClick={() => navigate('/historico')} >Histórico</div>
+                <div onClick={() => navigate('/hoje')} className='loaderCentral'>
+                    <CircularProgressbar
+                        value={66}
+                        text={'Hoje'}
+                        background
+                        backgroundPadding={6}
+                        styles={buildStyles({
+                            backgroundColor: "#3e98c7",
+                            textColor: "#fff",
+                            pathColor: "#fff",
+                            trailColor: "transparent"
+                        })}
+                    />
+                </div>
             </Footer>
-<Alinhar>
-                    <div className='loaderCentral'>
-                        <CircularProgressbar
-                            value={50}
-                            text={'50%'}
-                            background
-                            backgroundPadding={6}
-                            styles={buildStyles({
-                                backgroundColor: "#3e98c7",
-                                textColor: "#fff",
-                                pathColor: "#fff",
-                                trailColor: "transparent"
-                            })}
-                        />
-                    </div>
-                </Alinhar>
             <Compensando></Compensando>
         </>
     )
@@ -45,13 +40,34 @@ export default function Topo() {
 
 const Footer = styled.div`
     position: fixed;
-    min-width: 375px;
+    width: 100%;
     height: 70px;
     left: 0px;
     bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 36px 0 36px;
 
     background: #FFFFFF;;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+
+    color: #52B6FF;
+
+    .loaderCentral{
+         width: 91px;
+         height: 91px;
+         position: fixed;
+         bottom: 10px;
+         left: calc(50% - 45.5px);
+        
+     }
+
 
 `
 
@@ -60,21 +76,4 @@ const Compensando = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
-`
-
-
-const Alinhar =styled.div`
-    position: fixed;
-    width: 100%;
-    height: 91px;
-    display: flex;
-    justify-content: center;
-    bottom: 0;
-    margin-bottom: 10px;
-
-    .loaderCentral{
-        width: 91px;
-        height: 91px;
-        
-    }
 `
