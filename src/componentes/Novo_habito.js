@@ -17,7 +17,7 @@ semana.push('D')
 
 export default function Habito(){ 
     const navigate = useNavigate();  
-    const {diaHabito,novohab,ativado,setAtivado} = useContext(Contextos);
+    const {diaHabito,novohab,ativado,setAtivado,setNovohab} = useContext(Contextos);
     
     const [habito, setHabito] = useState('')
     const [botao,setBotao] = useState("")
@@ -40,8 +40,8 @@ export default function Habito(){
                {semana.map((day,index)=> (<Props_dia key = {index} dia = {day} indice = {index} />))}
             </div>
             <div className='salvar_cancelar'>
-                Cancelar
-                <div cor={cor} onClick={()=> (mandarAPI(),navigate('/habitos'))} className='salvar'>
+                <div onClick={()=> (setNovohab('apagar'))}>Cancelar</div>
+                <div cor={cor} onClick={()=> (mandarAPI())} className='salvar'>
                     <div className={botao}>Salvar</div>
                     <div className = {loader} ><ThreeDots color="#FFFFFF" height={45} width={45} /></div>
                 </div>
@@ -65,7 +65,7 @@ export default function Habito(){
                     
     
                 const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', dados,config);
-                promise.then(console.log('foi'))
+                promise.then(()=>document.location.reload(true))
                 promise.catch(()=> (setEspera(!true),alert("Algo de errado não está certo")))
     
                  if(espera !== true){

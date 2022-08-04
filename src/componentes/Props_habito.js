@@ -16,48 +16,57 @@ semana.push('D')
 
 const config = {
     headers: {
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`
     }
-  };
+};
 
-export default function Habito({nome,dias,id}){
-    const navigate = useNavigate();
+export default function Habito({ nome, dias, id }) {
+    const [del, setDel] = useState('')
+    const [confirm, setConfirm] = useState('apagar')
+    const [cancel, setCancel] = useState('apagar')
 
-    return(
+    return (
         <Habit>
-            <div onClick={()=> Delete()}><ion-icon name="trash-outline"></ion-icon></div>
+            <div className={cancel} onClick={() => (setCancel('apagar'),setConfirm('apagar'),setDel(''))}>Cancelar</div>
+            <div className={confirm} onClick={() => Delete()}>Confirmar</div>
+            <div clasName={del} onClick={() =>
+                    (setCancel('cancel'),
+                    setConfirm('delete'),
+                    setDel('apagar'))}>
+                <ion-icon name="trash-outline"></ion-icon></div>
             {nome}
             <Dias>
-            {semana.map((h,index)=><Props_dia key = {index} indice = {index} dia = {h} />)}
+                {semana.map((h, index) => <Props_dia key={index} indice={index} dia={h} />)}
             </Dias>
         </Habit>
     )
 
-    function Props_dia(props){
-        for(let i = 0; i < dias.length; i++){
-            if(dias[i] === (props.indice+1)) return <Dia cor = {'#FFFFFF'} back = {'#DBDBDB'} >{props.dia}</Dia>
+    function Props_dia(props) {
+        for (let i = 0; i < dias.length; i++) {
+            if (dias[i] === (props.indice + 1)) return <Dia cor={'#FFFFFF'} back={'#DBDBDB'} >{props.dia}</Dia>
         }
-        return(
-            <Dia cor = {'#DBDBDB'} back = {'#FFFFFF'} >{props.dia}</Dia>
+        return (
+            <Dia cor={'#DBDBDB'} back={'#FFFFFF'} >{props.dia}</Dia>
         )
     }
 
-    function Delete(){
+    function Delete() {
         console.log(id)
-            const requisicao = axios.delete(
-                `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,config
-            );
-    
-            requisicao.then(() => navigate('/habitos'));
+        const requisicao = axios.delete(
+            `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config
+        );
+
+        requisicao.then(() => document.location.reload(true));
     }
 }
 
-const Habit = styled.div `
+const Habit = styled.div`
     width: 340px;
     height: 91px;
 
     background: #FFFFFF;
     border-radius: 5px;
+    margin-bottom: 10px;
 
     font-style: normal;
     font-weight: 400;
@@ -78,6 +87,33 @@ const Habit = styled.div `
         position: absolute;
         top: 11px;
         right: 10px;
+    }
+
+    .cancel{
+        text-align: center;
+        position: absolute;
+        top: 11px;
+        right: 10px;
+        font-size: 10px;
+        width: 65px;
+        background: red;
+        border-radius: 4.63636px;
+        color: #FFFFFF;
+        z-index: 1;
+        
+    }
+
+    .delete{
+        text-align: center;
+        position: absolute;
+        top: 11px;
+        right: 80px;
+        font-size: 10px;
+        width: 65px;
+        background: green;
+        border-radius: 4.63636px;
+        color: #FFFFFF;
+        z-index: 1;
     }
 
 `
