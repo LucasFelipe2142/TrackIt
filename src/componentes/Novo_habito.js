@@ -32,7 +32,7 @@ export default function Habito(){
         }
       };
 
-
+console.log(diaHabito)
     return(
         <Novo_habito className={novohab}>
             <input disabled={desabilitarinput} type="text" name="input" placeholder="nome do hábito" value={habito} onChange={e => setHabito(e.target.value)} />
@@ -84,8 +84,8 @@ export default function Habito(){
 }
 
 const Novo_habito = styled.div`
-    width: 340px;
-    height: 180px;
+    min-width: 340px;
+    min-height: 180px;
     margin-bottom: 20px;
 
     background: #FFFFFF;

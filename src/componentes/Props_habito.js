@@ -29,7 +29,7 @@ export default function Habito({ nome, dias, id }) {
         <Habit>
             <div className={cancel} onClick={() => (setCancel('apagar'),setConfirm('apagar'),setDel(''))}>Cancelar</div>
             <div className={confirm} onClick={() => Delete()}>Confirmar</div>
-            <div clasName={del} onClick={() =>
+            <div className={del} onClick={() =>
                     (setCancel('cancel'),
                     setConfirm('delete'),
                     setDel('apagar'))}>
@@ -62,7 +62,8 @@ export default function Habito({ nome, dias, id }) {
 
 const Habit = styled.div`
     width: 340px;
-    height: 91px;
+    min-height: 91px;
+    padding: 13px 0 15px 0;
 
     background: #FFFFFF;
     border-radius: 5px;

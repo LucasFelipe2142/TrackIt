@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
+import Contextos from '../contextos/Context';
+import { useContext } from 'react';
 
 import {
     CircularProgressbar,
@@ -20,7 +22,7 @@ export default function Topo() {
                 <div onClick={() => navigate('/historico')} >Histórico</div>
                 <div onClick={() => navigate('/hoje')} className='loaderCentral'>
                     <CircularProgressbar
-                        value={66}
+                        value={JSON.parse(localStorage.getItem("porcentagem"))}
                         text={'Hoje'}
                         background
                         backgroundPadding={6}

@@ -10,14 +10,29 @@ import Habitos from './componentes/Habitos'
 export default function App() {
     const [diaHabito, setDiaHabito] = useState("")
     const [token, setToken] = useState("")
-    const [novohab,setNovohab] = useState('apagar')
-    const [ativado,setAtivado] = useState(true);
+    const [novohab, setNovohab] = useState('apagar')
+    const [ativado, setAtivado] = useState(true);
     const [habitos, setHabitos] = useState([])
+    const [hoje, setHoje] = useState(null)
+    const [aux, setAux] = useState(0)
     return (
         <>
             <GlobalStyle />
             <BrowserRouter>
-                <Contextos.Provider value={{ diaHabito, setDiaHabito, novohab, setNovohab, ativado, setAtivado, habitos, setHabitos }}>
+                <Contextos.Provider value={{
+                    diaHabito,
+                    setDiaHabito,
+                    novohab,
+                    setNovohab,
+                    ativado,
+                    setAtivado,
+                    habitos,
+                    setHabitos,
+                    hoje,
+                    setHoje,
+                    aux,
+                    setAux
+                }}>
                     <Routes>
                         <Route path="/" element={<Login />} />
                         <Route path="/cadastro" element={<Cadastrar />} />

@@ -19,7 +19,7 @@ export default function Habitos(){
             `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits`,config
         );
 
-        requisicao.then((Selecione) => { setHabitos(Selecione.data) });
+        requisicao.then((Selecione) => { setHabitos(Selecione.data.reverse()) });
     }, []);
 
     if (habitos.length === 0) {

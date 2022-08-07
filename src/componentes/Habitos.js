@@ -45,6 +45,7 @@ const Container = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
+padding-bottom: 100px;
     .button{
         width: 40px;
         height: 35px;

@@ -15,10 +15,12 @@ export default function  Props_dia(props){
     function escolher_dia(dia){
         if(ativado){
             if(fundo_dia === true){
+                if(dia+1 === 7) dias.push(0)
             dias.push(dia+1)
             setFundo_dia(false)
         }else{
             setFundo_dia(true)
+            if(dia+1 === 7) dias = dias.filter(item => item !== (0))
             dias = dias.filter(item => item !== (dia+1))
         }
         setDiaHabito(dias)
