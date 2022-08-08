@@ -12,12 +12,12 @@ let diaSemana = d.getDay()
 
 
 export default function Props_hoje({ hoje }) {
-
+    console.log("now",now)
     return (
         <>
             <Container >
                 <div className='texto'>
-                    <p>{`${verificardia()}, ${verificardata(now.$D)}/${verificardata(now.$M)}`}</p>
+                    <p>{`${verificardia()}, ${verificardata(now.$D)}/${verificardata(now.$M+1)}`}</p>
                     {verificaConcluidos()}
                 </div>
 
