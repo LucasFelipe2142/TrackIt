@@ -21,18 +21,19 @@ const config = {
 };
 
 export default function Habito({ nome, dias, id }) {
+    const navigate = useNavigate()
     const [del, setDel] = useState('')
     const [confirm, setConfirm] = useState('apagar')
     const [cancel, setCancel] = useState('apagar')
 
     return (
         <Habit>
-            <div className={cancel} onClick={() => (setCancel('apagar'),setConfirm('apagar'),setDel(''))}>Cancelar</div>
+            <div className={cancel} onClick={() => (setCancel('apagar'), setConfirm('apagar'), setDel(''))}>Cancelar</div>
             <div className={confirm} onClick={() => Delete()}>Confirmar</div>
             <div className={del} onClick={() =>
-                    (setCancel('cancel'),
-                    setConfirm('delete'),
-                    setDel('apagar'))}>
+            (setCancel('cancel'),
+                setConfirm('delete'),
+                setDel('apagar'))}>
                 <ion-icon name="trash-outline"></ion-icon></div>
             {nome}
             <Dias>
@@ -56,7 +57,7 @@ export default function Habito({ nome, dias, id }) {
             `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config
         );
 
-        requisicao.then(() => document.location.reload(true));
+        requisicao.then(() => navigate('/hoje'));
     }
 }
 

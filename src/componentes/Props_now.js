@@ -7,21 +7,21 @@ let aux2 = 0;
 
 const config = {
     headers: {
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`
     }
-  };
+};
 
 export default function Now({ h }) {
     const { aux, setAux } = useContext(Contextos)
     const [click, setClick] = useState('#666666')
     const [cu, setCu] = useState()
-    
+
     return (h.done ?
 
         <Box cor={'#8FC549'}>
             <ul className='text'>
                 <li><h2>{h.name}</h2></li>
-                <li>Sequência atual: <h1>..</h1> <Aux cor2={'#8FC549'}> {` ${ verifica(h.currentSequence)}`}</Aux></li>
+                <li>Sequência atual: <h1>..</h1> <Aux cor2={'#8FC549'}> {` ${verifica(h.currentSequence)}`}</Aux></li>
                 <li>Seu recorde: {igual()} </li>
 
             </ul>
@@ -34,7 +34,7 @@ export default function Now({ h }) {
         <Box cor={'#EBEBEB'}>
             <ul className='text'>
                 <li><h2>{h.name}</h2></li>
-                <li>Sequência atual: <h1>..</h1> <Aux cor2={'#666666'}> {` ${ verifica(h.currentSequence)}`}</Aux></li>
+                <li>Sequência atual: <h1>..</h1> <Aux cor2={'#666666'}> {` ${verifica(h.currentSequence)}`}</Aux></li>
                 <li>Seu recorde: {verifica(h.highestSequence)} </li>
 
             </ul>
@@ -46,29 +46,29 @@ export default function Now({ h }) {
 
     )
 
-     function igual(){
-        if(h.currentSequence === h.highestSequence)
-        return (<><h1>..</h1> <Aux cor2={'#8FC549'}> {` ${ verifica(h.highestSequence)}`}</Aux></>)
+    function igual() {
+        if (h.currentSequence === h.highestSequence)
+            return (<><h1>..</h1> <Aux cor2={'#8FC549'}> {` ${verifica(h.highestSequence)}`}</Aux></>)
         else return verifica(h.highestSequence)
-        
-     }   
 
-    function desfaz(id){
-        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,{},config);
-        promise.then(()=>document.location.reload(true))
     }
 
-    function verifica(qtd){
-        if(qtd > 1) return`${qtd} dias`
-        else if(qtd === 1) return`${qtd} dia`
-        else return`${qtd} dias`
+    function desfaz(id) {
+        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, {}, config);
+        promise.then(() => document.location.reload(true))
+    }
+
+    function verifica(qtd) {
+        if (qtd > 1) return `${qtd} dias`
+        else if (qtd === 1) return `${qtd} dia`
+        else return `${qtd} dias`
     }
 
     function conclui(id) {
 
 
-        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,{},config);
-        promise.then(()=>document.location.reload(true))
+        const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, {}, config);
+        promise.then(() => document.location.reload(true))
     }
 
 }

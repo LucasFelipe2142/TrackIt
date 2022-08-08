@@ -4,28 +4,28 @@ import Contextos from '../contextos/Context'
 
 let dias = []
 
-export default function  Props_dia(props){
-    const {setDiaHabito, ativado} = useContext(Contextos);
+export default function Props_dia(props) {
+    const { setDiaHabito, ativado } = useContext(Contextos);
     const [fundo_dia, setFundo_dia] = useState(true)
-    return( fundo_dia ?
-        <><Dia cor = {'#DBDBDB'} back = {'#FFFFFF'} onClick={()=> escolher_dia(props.indice)}>{props.dia}</Dia></>
-        : <><Dia cor = {'#FFFFFF'} back = {'#DBDBDB'} onClick={()=> escolher_dia(props.indice)}>{props.dia}</Dia></>
+    return (fundo_dia ?
+        <><Dia cor={'#DBDBDB'} back={'#FFFFFF'} onClick={() => escolher_dia(props.indice)}>{props.dia}</Dia></>
+        : <><Dia cor={'#FFFFFF'} back={'#DBDBDB'} onClick={() => escolher_dia(props.indice)}>{props.dia}</Dia></>
     )
 
-    function escolher_dia(dia){
-        if(ativado){
-            if(fundo_dia === true){
-                if(dia+1 === 7) dias.push(0)
-            dias.push(dia+1)
-            setFundo_dia(false)
-        }else{
-            setFundo_dia(true)
-            if(dia+1 === 7) dias = dias.filter(item => item !== (0))
-            dias = dias.filter(item => item !== (dia+1))
+    function escolher_dia(dia) {
+        if (ativado) {
+            if (fundo_dia === true) {
+                if (dia + 1 === 7) dias.push(0)
+                dias.push(dia + 1)
+                setFundo_dia(false)
+            } else {
+                setFundo_dia(true)
+                if (dia + 1 === 7) dias = dias.filter(item => item !== (0))
+                dias = dias.filter(item => item !== (dia + 1))
+            }
+            setDiaHabito(dias)
         }
-        setDiaHabito(dias)
-        }
-        
+
     }
 }
 

@@ -1,7 +1,7 @@
 
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
-import { useContext,useState } from "react";
+import { useContext, useState } from "react";
 import Topo from './Top'
 import Footer from './Footer'
 import Contextos from '../contextos/Context'
@@ -10,32 +10,32 @@ import Meus_habitos from './Meus_habitos'
 
 
 
-export default function Hoje(){
-    const {novohab,setNovohab,habitos} = useContext(Contextos)
+export default function Hoje() {
+    const { novohab, setNovohab, habitos } = useContext(Contextos)
     let temhabito;
 
-    if(habitos.length === 0){
+    if (habitos.length === 0) {
         temhabito = 'instruction'
-    }else temhabito = 'instruction apagar'
+    } else temhabito = 'instruction apagar'
 
 
-    return(
-        <Container><div style={{height: 91,}}></div>
+    return (
+        <Container><div style={{ height: 91, }}></div>
             <Topo />
             <div className='inserir_habito'>
-            Meus hábitos
-            <div onClick={() => ativar()} className='button'>+</div>
+                Meus hábitos
+                <div onClick={() => ativar()} className='button'>+</div>
             </div>
             <Novo_habito />
             <Meus_habitos />
             <div className={temhabito}>
-            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
             </div>
             <Footer />
         </Container>
     )
-    function ativar(){
-        if(novohab === 'apagar')setNovohab("");
+    function ativar() {
+        if (novohab === 'apagar') setNovohab("");
         else setNovohab('apagar')
     }
 

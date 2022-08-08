@@ -22,7 +22,7 @@ export default function Props_hoje({ hoje }) {
                 </div>
 
 
-                {hoje.map((h, index) => <Props_now key = {index} h={h} />)}
+                {hoje.map((h, index) => <Props_now key={index} h={h} />)}
             </Container>
 
         </>
@@ -31,7 +31,7 @@ export default function Props_hoje({ hoje }) {
         if (JSON.parse(localStorage.getItem("porcentagem")) === null || JSON.parse(localStorage.getItem("porcentagem")) === 0) {
             return <Sub cor={'#BABABA'}>Nenhum hábito concluído ainda</Sub>
 
-        }else{
+        } else {
             return <Sub cor={'#8FC549'}>{`${JSON.parse(localStorage.getItem("porcentagem"))}% dos hábitos concluídos`}</Sub>
         }
     }

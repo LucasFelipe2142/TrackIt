@@ -14,36 +14,35 @@ let now = dayjs()
 
 const config = {
     headers: {
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`
     }
-  };
+};
 let aux2 = 0;
-export default function Hoje(){  
-    const [hoje,setHoje] = useState(null)
+export default function Hoje() {
+    const [hoje, setHoje] = useState(null)
 
     useEffect(() => {
         const requisicao = axios.get(
-            `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today`,config
+            `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today`, config
         );
 
-        requisicao.then((Selecione) =>  (setHoje(Selecione.data)));
+        requisicao.then((Selecione) => (setHoje(Selecione.data)));
     }, []);
 
     if (hoje === null) {
-         return false
+        return false
     }
-    console.log(hoje[1].done)
-    for(let i = 0; i < hoje.length; i++){
-        if(hoje[i].done === true) aux2++;
+    for (let i = 0; i < hoje.length; i++) {
+        if (hoje[i].done === true) aux2++;
     }
     console.log(aux2)
-    let porcentagem = ((aux2*100)/hoje.length);
+    let porcentagem = ((aux2 * 100) / hoje.length);
     localStorage.setItem("porcentagem", JSON.stringify(porcentagem));
 
-    return(
+    return (
         <Container>
             <Topo />
-            <Props_hoje hoje ={hoje} porcentagem = {porcentagem} />
+            <Props_hoje hoje={hoje} porcentagem={porcentagem} />
             <Footer />
         </Container>
     )

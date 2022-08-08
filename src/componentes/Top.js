@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useContext } from 'react';
 
 export default function Topo() {
-    const {foto,token} = useContext(Contextos);
+    const { foto, token } = useContext(Contextos);
     return (
         <>
             <Top>

@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
-import Contextos from '../contextos/Context';
-import { useContext } from 'react';
 
 import {
     CircularProgressbar,
-    CircularProgressbarWithChildren,
     buildStyles
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -20,7 +17,7 @@ export default function Topo() {
             <Footer>
                 <div onClick={() => navigate('/habitos')} >Hábitos</div>
                 <div onClick={() => navigate('/historico')} >Histórico</div>
-                <div onClick={() => navigate('/hoje')} className='loaderCentral'>
+                <div onClick={() => (localStorage.setItem("porcentagem", 0), navigate('/hoje'))} className='loaderCentral'>
                     <CircularProgressbar
                         value={JSON.parse(localStorage.getItem("porcentagem"))}
                         text={'Hoje'}

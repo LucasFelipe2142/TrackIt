@@ -1,8 +1,8 @@
 import logo from '../img/logo.png'
 import styled from 'styled-components';
 
-export default function Logo_img(){
-    return(
+export default function Logo_img() {
+    return (
         <Imagem>
             <img src={logo} />
             TrackIt

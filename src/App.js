@@ -6,15 +6,16 @@ import Cadastrar from "./componentes/Cadrastro";
 import { useState, useEffect } from "react";
 import Contextos from './contextos/Context'
 import Habitos from './componentes/Habitos'
+import Historico from './componentes/Historico'
+import PrivatePage from "./componentes/Private_Pages";
 
 export default function App() {
     const [diaHabito, setDiaHabito] = useState("")
-    const [token, setToken] = useState("")
     const [novohab, setNovohab] = useState('apagar')
     const [ativado, setAtivado] = useState(true);
     const [habitos, setHabitos] = useState([])
-    const [hoje, setHoje] = useState(null)
-    const [aux, setAux] = useState(0)
+    const [aux, setAux] = useState([])
+
     return (
         <>
             <GlobalStyle />
@@ -28,16 +29,34 @@ export default function App() {
                     setAtivado,
                     habitos,
                     setHabitos,
-                    hoje,
-                    setHoje,
                     aux,
                     setAux
                 }}>
                     <Routes>
                         <Route path="/" element={<Login />} />
                         <Route path="/cadastro" element={<Cadastrar />} />
-                        <Route path="/hoje" element={<Hoje />} />
-                        <Route path="/habitos" element={<Habitos />} />
+
+                        <Route path="/hoje"
+                            element={
+                                <PrivatePage>
+                                    <Hoje />
+                                </PrivatePage>
+                            } />
+
+                        <Route path="/habitos"
+                            element={
+                                <PrivatePage>
+                                    <Habitos />
+                                </PrivatePage>
+                            } />
+
+                        <Route path="/historico"
+                            element={
+                                <PrivatePage>
+                                    <Historico />
+                                </PrivatePage>
+                            } />
+
                     </Routes>
                 </Contextos.Provider>
             </BrowserRouter>

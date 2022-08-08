@@ -3,30 +3,30 @@ import styled from 'styled-components';
 import Logo from './Logo_nome'
 import { useNavigate } from 'react-router';
 import { useState, useEffect } from "react";
-import { ThreeDots } from  'react-loader-spinner'
+import { ThreeDots } from 'react-loader-spinner'
 
-export default function Cadastro(){
+export default function Cadastro() {
     const navigate = useNavigate();
-    const [login,setLogin] = useState('')
-    const [senha,setSenha] = useState('')
-    const [nome,setNome] = useState('')
-    const [foto,setFoto] = useState('')
-    const [mostrar,setMostrar] = useState("password")
-    const [icon,setIcon] = useState("eye-outline")
-    const [botao,setBotao] = useState("")
-    const [loader,setLoader] = useState("apagar")
-    const [ativado,setAtivado] = useState(true);
-    const [cor,setCor] = useState(1);
-    const [espera,setEspera] = useState(true);
-    const [desabilitarinput,setDesabilitarinput] = useState(false)
+    const [login, setLogin] = useState('')
+    const [senha, setSenha] = useState('')
+    const [nome, setNome] = useState('')
+    const [foto, setFoto] = useState('')
+    const [mostrar, setMostrar] = useState("password")
+    const [icon, setIcon] = useState("eye-outline")
+    const [botao, setBotao] = useState("")
+    const [loader, setLoader] = useState("apagar")
+    const [ativado, setAtivado] = useState(true);
+    const [cor, setCor] = useState(1);
+    const [espera, setEspera] = useState(true);
+    const [desabilitarinput, setDesabilitarinput] = useState(false)
 
-    return(
+    return (
         <Container>
             <Logo></Logo>
             <input disabled={desabilitarinput} type="text" name="input" placeholder="email" value={login} onChange={e => setLogin(e.target.value)} />
             <input disabled={desabilitarinput} type={mostrar} name="input" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} />
             <input disabled={desabilitarinput} type="text" name="input" placeholder="nome" value={nome} onChange={e => setNome(e.target.value)} />
-            <input disabled={desabilitarinput} type="text" name="input" placeholder="foto" value={foto} onChange={e => setFoto(e.target.value)} />  
+            <input disabled={desabilitarinput} type="text" name="input" placeholder="foto" value={foto} onChange={e => setFoto(e.target.value)} />
             <div className='mostrar_senha'>
                 Mostrar senha
                 <Mostrar onClick={() => toggle()}> <ion-icon name={icon}></ion-icon></Mostrar>
@@ -34,11 +34,11 @@ export default function Cadastro(){
 
             <Button cor={cor} onClick={() => Enviar()}>
                 <div className={botao}>Cadastrar</div>
-                <div className = {loader} ><ThreeDots color="#FFFFFF" height={60} width={60} /></div>   
+                <div className={loader} ><ThreeDots color="#FFFFFF" height={60} width={60} /></div>
             </Button>
 
             <p onClick={() => navigate('/')} >Já tem uma conta? Faça login!</p>
-            
+
         </Container>
     )
 
@@ -54,10 +54,10 @@ export default function Cadastro(){
         }
     }
 
-    function Enviar(){
-        if(ativado){
+    function Enviar() {
+        if (ativado) {
             console.log('ativado')
-            if(login !== '' && senha !== '' && foto !== '' && nome !== '' ){
+            if (login !== '' && senha !== '' && foto !== '' && nome !== '') {
                 setDesabilitarinput(true)
                 setAtivado(!true)
                 setBotao("apagar")
@@ -69,14 +69,14 @@ export default function Cadastro(){
                     image: foto,
                     password: senha
                 }
-                    console.log(dados)
+                console.log(dados)
 
-                 const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', dados);
-                 promise.then(()=> (navigate('/')))
-                 promise.catch(()=> (setEspera(!true),alert("Algo de errado não está certo")))
+                const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', dados);
+                promise.then(() => (navigate('/')))
+                promise.catch(() => (setEspera(!true), alert("Algo de errado não está certo")))
 
-                 if(espera === true){
-                    setTimeout(()=>(
+                if (espera === true) {
+                    setTimeout(() => (
                         setDesabilitarinput(false),
                         setAtivado(true),
                         setBotao(""),
@@ -84,7 +84,7 @@ export default function Cadastro(){
                         setCor(1),
                         setEspera(true)
                     ), 1000)
-                 }
+                }
             } else alert("Preench todos os campos");
         } else console.log('desativado')
     }

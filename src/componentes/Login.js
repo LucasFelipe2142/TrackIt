@@ -2,26 +2,24 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Logo from './Logo_nome'
 import { useNavigate } from 'react-router';
-import { useState, useEffect,useContext } from "react";
-import { ThreeDots } from  'react-loader-spinner'
-import Contextos from '../contextos/Context';
+import { useState, useEffect, useContext } from "react";
+import { ThreeDots } from 'react-loader-spinner'
 
-export default function Login(){
+export default function Login() {
     const navigate = useNavigate();
-    const [login,setLogin] = useState('')
-    const [senha,setSenha] = useState('')
-    const [mostrar,setMostrar] = useState("password")
-    const [icon,setIcon] = useState("eye-outline")
-    const [botao,setBotao] = useState("")
-    const [loader,setLoader] = useState("apagar")
-    const [ativado,setAtivado] = useState(true);
-    const [cor,setCor] = useState(1);
-    const [espera,setEspera] = useState(true);
-    const [desabilitarinput,setDesabilitarinput] = useState(false)
+    const [login, setLogin] = useState('')
+    const [senha, setSenha] = useState('')
+    const [mostrar, setMostrar] = useState("password")
+    const [icon, setIcon] = useState("eye-outline")
+    const [botao, setBotao] = useState("")
+    const [loader, setLoader] = useState("apagar")
+    const [ativado, setAtivado] = useState(true);
+    const [cor, setCor] = useState(1);
+    const [espera, setEspera] = useState(true);
+    const [desabilitarinput, setDesabilitarinput] = useState(false)
 
-    const {setFoto,setToken} = useContext(Contextos);
 
-    return(
+    return (
         <Container>
             <Logo></Logo>
             <input disabled={desabilitarinput} type="text" name="input" placeholder="email" value={login} onChange={e => setLogin(e.target.value)} />
@@ -32,11 +30,11 @@ export default function Login(){
             </div>
             <Button cor={cor} onClick={() => Enviar()}>
                 <div className={botao}>Entrar</div>
-                <div className = {loader} ><ThreeDots color="#FFFFFF" height={60} width={60} /></div>   
+                <div className={loader} ><ThreeDots color="#FFFFFF" height={60} width={60} /></div>
             </Button>
 
             <p onClick={() => navigate('/cadastro')} >Não tem uma conta? Cadastre-se!</p>
-            
+
         </Container>
     )
 
@@ -52,41 +50,41 @@ export default function Login(){
         }
     }
 
-    function Enviar(){ 
+    function Enviar() {
 
-       if(ativado){
-        console.log('ativado')
-        if(login !== '' && senha !== ''){
-            setDesabilitarinput(true)
-            setAtivado(!true)
-            setBotao("apagar")
-            setLoader("")
-            setCor(0.7)
-            let dados = {
-                email: login,
-                password: senha
-            }
-                
+        if (ativado) {
+            console.log('ativado')
+            if (login !== '' && senha !== '') {
+                setDesabilitarinput(true)
+                setAtivado(!true)
+                setBotao("apagar")
+                setLoader("")
+                setCor(0.7)
+                let dados = {
+                    email: login,
+                    password: senha
+                }
 
-             const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', dados);
-             promise.then(logar)
-             promise.catch(()=> (setEspera(!true),alert("Algo de errado não está certo")))
 
-             if(espera !== true){
-                setTimeout(()=>(
-                    setDesabilitarinput(false),
-                    setAtivado(true),
-                    setBotao(""),
-                    setLoader("apagar"),
-                    setCor(1),
-                    setEspera(true)
-                ), 1000)
-             }
-        } else alert("Preench todos os campos");
-    } else console.log('desativado')
+                const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', dados);
+                promise.then(logar)
+                promise.catch(() => (setEspera(!true), alert("Algo de errado não está certo")))
+
+                if (espera === true) {
+                    setTimeout(() => (
+                        setDesabilitarinput(false),
+                        setAtivado(true),
+                        setBotao(""),
+                        setLoader("apagar"),
+                        setCor(1),
+                        setEspera(true)
+                    ), 1000)
+                }
+            } else alert("Preench todos os campos");
+        } else console.log('desativado')
     }
 
-    function logar(promise){
+    function logar(promise) {
         localStorage.setItem("token", JSON.stringify(promise.data.token));
         localStorage.setItem("perfil", JSON.stringify(promise.data.image));
         navigate('/hoje')
