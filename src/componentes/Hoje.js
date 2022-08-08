@@ -37,7 +37,7 @@ export default function Hoje() {
     }
     console.log(aux2)
     let porcentagem = ((aux2 * 100) / hoje.length);
-    localStorage.setItem("porcentagem", JSON.stringify(porcentagem));
+    localStorage.setItem("porcentagem", parseInt(JSON.stringify(porcentagem)));
 
     return (
         <Container>
